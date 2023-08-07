@@ -104,7 +104,7 @@ Sau đây là các bước cơ bản để có thể cài đặt và vận hành
 
 2. Nếu dùng Termux, vui lòng nhập dòng lệnh sau (Tự động cài đặt các gói cần thiết):
     ```sh
-    bash <(curl -Ls https://raw.githubusercontent.com/dragonx943/MiraiBypassGBan/main/termux.sh)
+    bash <(curl -Ls https://raw.githubusercontent.com/dragonx943/MiraiBypassGBan-OREO/main/autoinstall-termux.sh)
     ```
 3. Đợi mọi package cài đặt thành công là có thể tiếp tục
 
@@ -132,7 +132,7 @@ Sau đây là các bước cơ bản để có thể cài đặt và vận hành
 
 1. Đăng nhập vào hệ điều hành với quyền quản trị viên (Root) và gõ câu lệnh sau (Tự động cài đặt các gói cần thiết):
       ```sh
-      bash <(curl -Ls https://raw.githubusercontent.com/dragonx943/MiraiBypassGBan/main/linux.sh)
+      bash <(curl -Ls https://raw.githubusercontent.com/dragonx943/MiraiBypassGBan-OREO/main/autoinstall-linux.sh)
       ```
 2. Chờ cho đến khi cài đặt hoàn tất, thực hiện bước 4 và 5 của mục dành cho Android
 
@@ -142,7 +142,7 @@ Sau đây là các bước cơ bản để có thể cài đặt và vận hành
 
 1. Nhập câu lệnh sau vào app iSH Shell (Tự động cài đặt các gói cần thiết):
       ```sh
-      ash <(curl -Ls https://raw.githubusercontent.com/dragonx943/MiraiBypassGBan/main/alpine.sh)
+      ash <(curl -Ls https://raw.githubusercontent.com/dragonx943/MiraiBypassGBan-OREO/main/autoinstall-alpine.sh)
       ```
 2. Chờ cho đến khi cài đặt xong thì thực hiện giống bước 4 và 5 của mục dành cho Android
 

@@ -10,10 +10,10 @@
     "EMAIL": "",
     "PASSWORD": "",
     "OTPKEY": "",
-    "BOTNAME": "Gimaru",
+    "BOTNAME": "",
     "PREFIX": "/",
     "ADMINBOT": [
-        "100022372080861",
+        "",
         "",
         ""
     ],

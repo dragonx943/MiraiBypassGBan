@@ -1,0 +1,104 @@
+# Nếu bạn muốn xuống dòng, hãy dùng\n. VD: SpermLord\nCatalizcs.
+# Sau khi thay đổi, bạn phải khởi động lại bot để có hiệu lực.
+# Đặt kí tự # ở đầu mỗi câu nếu bạn không muốn code chạy những dòng đó.
+# Thanks to CatalizCS for translate to Vietnamese!
+
+# mirai.js
+
+mirai.errorFormat=Module không đúng định dạng!
+mirai.nameExist=Tên module bị trùng với một module mang cùng tên khác!
+mirai.notFoundLanguage=Module %1 không hỗ trợ ngôn ngữ ngôn ngữ của bạn
+mirai.notFoundPackage=Không tìm thấy package %1 cho module %2, đang cài đặt...
+mirai.cantInstallPackage=Không thể cài đặt package %1 cho module %2, lỗi: %3
+mirai.loadedPackage=Đã tải thành công toàn bộ package cho module %1
+mirai.loadedConfig=Đã tải thành công config cho module %1
+mirai.cantLoadConfig=Không thể tải config của module %1, lỗi: %2
+mirai.cantOnload=Không thể khởi chạy setup của module %1, lỗi: %1
+mirai.successLoadModule=Đã tải thành công module %1
+mirai.failLoadModule=Không thể tải thành công module %1, lỗi: %2
+mirai.finishLoadModule=Đã tải: %1 lệnh, %2 events!
+mirai.foundPathAppstate=Đã tìm thấy file: appstate.json
+mirai.notFoundPathAppstate=Không tìm thấy file appstate.json
+mirai.checkListGban=Đang check list GBan...Có đ đâu mà check, BYPASSED !!!
+mirai.banDevice=CHƯA BỊ BAN, CHƯA BỊ BAN EHE !!!
+mirai.keyNotSameFormat=Key unban sai định dạng!
+mirai.codeInputExpired=Code bạn nhập không trùng khớp hoặc đã hết hạn!
+mirai.unbanDeviceSuccess=Hết ban rồi, khởi động lại thôi!
+mirai.userBanned=Lúc %1, bạn CHƯA BỊ BAN với lý do: %2. Đ cần liên hệ với ai cả, hết!
+mirai.finishCheckListGban=File Bot đã được Bypass, bỏ qua đoạn check list!
+mirai.handleListenError=handleListener đã xảy ra lỗi: %1
+mirai.warningSourceCode=PHÁT HIỆN SOURCE CODE ĐÃ BỊ THAY ĐỔI CẤU TRÚC, THÌ RA LÀ M DÙNG BYPASS!
+mirai.refreshListen=Đã làm mới lại handleListener...
+mirai.successConnectDatabase=Đang tiến hành BypassGBan...
+mirai.failConnectDatabase=Quá trình BypassGBan lỗi: %1
+
+# includes/listen.js
+
+listen.startLoadEnvironment=Tiến hành khởi tạo biến môi trường...
+listen.loadedEnvironmentThread=Đã tải xong dữ liệu đã lưu của nhóm!
+listen.loadedEnvironmentUser=Đã hack xong Database của người dùng Facebook!
+listen.successLoadEnvironment=Bot đã được load xong, quay lại Facebook thôi!
+listen.failLoadEnvironment=Khởi tạo biến môi trường không thành công, lỗi: %1
+
+# includes/controller/currencies.js
+
+currencies.needObjectOrArray=Phải là một Array hoặc Object hoặc có thể là cả hai
+currencies.needObject=Phải là một Object
+currencies.needNumber= Phải là một con số
+
+# includes/controller/threads.js
+
+threads.needObjectOrArray=Phải là một Array hoặc Object hoặc có thể là cả hai
+threads.needObject=Phải là một Object
+
+# includes/controller/users.js
+
+users.needObjectOrArray=Phải là một Array hoặc Object hoặc có thể là cả hai
+users.needObject=Phải là một Object
+
+# includes/handle/handleCommand.js
+
+handleCommand.userBanned=Hiện tại bạn đang bị cấm dùng bot!\n%1\n%2
+handleCommand.threadBanned=Hiện tại nhóm đang bị cấm dùng bot!\n%1\n%2
+handleCommand.commandNotExist=Sai câu lệnh, lệnh gần nhất với từ khóa của bạn: "%1"
+handleCommand.commandThreadBanned=Nhóm bạn đã bị cấm dùng lệnh: "%1"
+handleCommand.commandUserBanned=Bạn đã bị cấm dùng lệnh: "%1"
+handleCommand.threadNotAllowNSFW=Dùng lệnh segs cc, nơi này đã bị phong tỏa! Gọi Admin để giải quyết!
+handleCommand.cantGetInfoThread=Không thể lấy thông tin của nhóm, lỗi: %1
+handleCommand.permssionNotEnough=Làm đ gì có quyền mà dùng lệnh: "%1"
+handleCommand.cantSetMessageReaction=Tại setMessageReaction đã xảy ra lỗi: %1
+handleCommand.notFoundLanguage=Đã tải thành công module: %1s ở 1 ngôn ngữ khác!
+handleCommand.executeCommand=[ %1 ] Lệnh: %2 | Người dùng: %3 | Nhóm: %4 | Content đi kèm: %5 | Độ trễ: %6ms
+handleCommand.commandError=Đang dùng lệnh %1 thì bị lỗi: %2. Cay vl!
+
+# includes/handle/handleCommandEvent.js
+
+handleCommandEvent.moduleError=Đang dùng lệnh %1 thì bị lỗi: %2. Cay vl!
+
+# includes/handle/handleCreateDatabase.js
+
+handleCreateDatabase.newThread=Đã detect được group mới, đang luộc database: %1
+handleCreateDatabase.newUser=Đã detect người dùng mới, đang thêm vào database: %1
+
+# includes/handle/handleEvent.js
+
+handleEvent.executeEvent=[ %1 ] Event được thực thi: %2 | Nhóm: %3 | Thời gian xử lý: %4ms
+handleEvent.eventError=Đang thực thi events %1 thì bị lỗi: %12. Cay vl!
+
+# includes/handle/handleReaction.js
+
+handleReaction.missingValue=Thiếu dữ liệu để có thể thực thi phản hồi lại câu trả lời của bạn
+handleReaction.executeError=Đã xảy ra lỗi không mong muốn khi đang thực thi trả lời câu hỏi bạn, lỗi: %1
+
+# includes/handle/handleReply.js
+
+handleReply.missingValue=Thiếu dữ liệu để có thể thực thi phản hồi lại câu trả lời của bạn
+handleReply.executeError=Đã xảy ra lỗi không mong muốn khi đang thực thi trả lời câu hỏi bạn, lỗi: %1
+
+# includes/handle/handleSchedule.js
+
+handleSchedule.exectuteError=Đã xảy ra lỗi không mong muốn trong lúc schedule tại module %1, lỗi: %2
+
+# utils/index.js
+
+utils.throwError=Không đúng cách dùng lệnh, vui lòng tham khảo cách dùng tại: %1help %2 !!!

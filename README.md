@@ -88,7 +88,7 @@ Sau đây là các bước cơ bản để có thể cài đặt và vận hành
     2. tùy chỉnh dấu lệnh, tên bot, developer mode, api token...
     3. Lưu và đóng lại
 
-6. Lấy appstate: Bạn có thể sử dụng fbstate của c3c bot, nhưng cần đổi tên lại thành fbstate.json
+6. Lấy appstate: Bạn có thể sử dụng fbstate của c3c bot, nhưng cần đổi tên lại thành appstate.json
 
 7. Chạy bot và tận hưởng
     1. Nhập
@@ -108,11 +108,14 @@ Sau đây là các bước cơ bản để có thể cài đặt và vận hành
     ```
 3. Đợi mọi package cài đặt thành công là có thể tiếp tục
 
-4. Clone bot & Lấy appstate
+4. Clone bot, cài packages & lấy appstate:
     ```sh
     git clone https://github.com/dragonx943/MiraiBypassGBan
     ```
-    - Bạn có thể sử dụng fbstate của c3c bot, nhưng cần đổi tên lại thành fbstate.json
+    ```sh
+    cd MiraiBypassGBan & npm i
+    ```
+    - Bạn có thể sử dụng fbstate của c3c bot, nhưng cần đổi tên lại thành appstate.json
 
 5. Về cách sử dụng, edit, vận hành
       1. Để chỉnh sửa file appstate của bot, vui lòng nhập:
@@ -149,6 +152,16 @@ Sau đây là các bước cơ bản để có thể cài đặt và vận hành
 **Lưu ý**:
 - iSH Shell hoặc Alpine Linux cần có curl. Nếu Terminal báo lỗi "-ash: curl: not found", vui lòng cài đặt curl bằng "apk add curl".
 - Trong quá trình thực thi câu lệnh và cài đặt, nếu Terminal của bạn không phản hồi hoặc không đưa kết quả ra màn hình, vui lòng kiểm tra lại đường truyền kết nối mạng và thử cài đặt lại !!!
+
+#### Replit/Github
+
+Ngoài các cách chạy trên thì vẫn còn 1 số cách chạy khác như dùng Replit hoặc Github để treo !!!
+
+1. Github: Tạo tài khoản Github, đăng nhập vô, Fork project này về sau đó ấn vô mục Code (dùng đt buộc phải để chế độ hiển thị dạng máy tính mới có), qua tab Codespaces và ấn + sau đó tiến hành cài đặt:
+      ```sh
+      npm i
+      ```
+2. Replit: Tạo tài khoản, đăng nhập, tạo project
 
 #### Video hướng dẫn cài đặt
 

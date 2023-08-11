@@ -86,5 +86,32 @@
     },
     "log": {
         "enable": true
+    },
+    "boctham": {
+        "cooldownTime": ""
+    },
+    "cave": {
+        "cooldownTime": 1000000
+    },
+    "gamelq": {
+        "cooldownTime": 60
+    },
+    "lixi": {
+        "cooldownTime": 1200000
+    },
+    "loto": {
+        "maxPlayers": 10,
+        "getDelay": 8
+    },
+    "menu": {
+        "autoUnsend": true,
+        "delayUnsend": 60
+    },
+    "rankup": {
+        "autoUnsend": "",
+        "unsendMessageAfter": 5
+    },
+    "subnautica": {
+        "APIKEY": ""
     }
 }

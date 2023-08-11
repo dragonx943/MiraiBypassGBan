@@ -16,7 +16,7 @@ mirai.cantLoadConfig=Không thể tải config của module %1, lỗi: %2
 mirai.cantOnload=Không thể khởi chạy setup của module %1, lỗi: %1
 mirai.successLoadModule=Đã tải thành công module %1
 mirai.failLoadModule=Không thể tải thành công module %1, lỗi: %2
-mirai.finishLoadModule=Đã tải: %1 lệnh, %2 events!
+mirai.finishLoadModule=🖥 Đã tải: %1 lệnh, %2 events!
 mirai.foundPathAppstate=Đã tìm thấy file: appstate.json
 mirai.notFoundPathAppstate=Không tìm thấy file appstate.json
 mirai.checkListGban=Đang check list GBan...Có đ đâu mà check, BYPASSED !!!
@@ -69,7 +69,7 @@ handleCommand.permssionNotEnough=Làm đ gì có quyền mà dùng lệnh
 handleCommand.cantSetMessageReaction=Tại setMessageReaction đã xảy ra lỗi: %1
 handleCommand.notFoundLanguage=Đã tải thành công module: %1s ở 1 ngôn ngữ khác!
 handleCommand.executeCommand=[ %1 ] Lệnh: %2 | Người dùng: %3 | Nhóm: %4 | Content đi kèm: %5 | Độ trễ: %6ms
-handleCommand.commandError=Đang dùng lệnh %1 thì bị lỗi: %2. Cay vl!
+handleCommand.commandError=Đang nạp lệnh %1 thì bị lỗi: %2. Cay vl!
 
 # includes/handle/handleCommandEvent.js
 

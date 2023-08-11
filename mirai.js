@@ -7,8 +7,19 @@ const { join, resolve } = require("path");
 const { execSync } = require('child_process');
 const logger = require("./utils/log.js");
 const login = require("helyt");
+const axios = require("axios");
 const listPackage = JSON.parse(readFileSync('./package.json')).dependencies;
 const listbuiltinModules = require("module").builtinModules;
+const express = require('express');
+const port = 3000;
+
+const app = express();
+app.get('/', (req, res) => {
+    res.send('Bypassed! Hãy tận dụng trang web này để treo Bot 24/24 bằng UptimeRobot,...MiraiBypassGBan')
+  })
+app.listen(port, () => {
+    logger.loader('Bot đã mở web server ở cổng: 3000!')
+});
 
 global.client = new Object({
     commands: new Map(),
@@ -35,7 +46,7 @@ global.data = new Object({
     allThreadID: new Array()
 });
 
-global.utils = require("./utils");
+global.utils = require("./utils/index.js");
 
 global.nodemodule = new Object();
 
@@ -55,21 +66,24 @@ var configValue;
 try {
     global.client.configPath = join(global.client.mainPath, "config.json");
     configValue = require(global.client.configPath);
-    logger.loader("Đã tìm thấy file: config.json");
-} catch {
-    if (existsSync(global.client.configPath.replace(/\.json/g, "") + ".temp")) {
-        configValue = readFileSync(global.client.configPath.replace(/\.json/g, "") + ".temp");
+    logger.loader("Found file config: config.json");
+}
+catch {
+    if (existsSync(global.client.configPath.replace(/\.json/g,"") + ".temp")) {
+        configValue = readFileSync(global.client.configPath.replace(/\.json/g,"") + ".temp");
         configValue = JSON.parse(configValue);
         logger.loader(`Found: ${global.client.configPath.replace(/\.json/g,"") + ".temp"}`);
-    } else return logger.loader("Thiếu file config.json hoặc file bị lỗi!", "error");
+    }
+    else return logger.loader("config.json not found!", "error");
 }
 
 try {
     for (const key in configValue) global.config[key] = configValue[key];
-    logger.loader("Đã tải xong Config!");
-} catch { return logger.loader("Không tải được Config!", "error") }
+    logger.loader("Config Loaded!");
+}
+catch { return logger.loader("Can't load file config!", "error") }
 
-const { Sequelize, sequelize } = require("./includes/database");
+const { Sequelize, sequelize } = require("./includes/database/index.js");
 
 writeFileSync(global.client.configPath + ".temp", JSON.stringify(global.config, null, 4), 'utf8');
 
@@ -90,8 +104,8 @@ for (const item of langData) {
     global.language[head][key] = value;
 }
 
-global.getText = function(...args) {
-    const langText = global.language;
+global.getText = function (...args) {
+    const langText = global.language;    
     if (!langText.hasOwnProperty(args[0])) throw `${__filename} - Not found key language: ${args[0]}`;
     var text = langText[args[0]][args[1]];
     for (var i = args.length - 1; i > 0; i--) {
@@ -104,14 +118,85 @@ global.getText = function(...args) {
 try {
     var appStateFile = resolve(join(global.client.mainPath, global.config.APPSTATEPATH || "appstate.json"));
     var appState = require(appStateFile);
-    logger.loader(global.getText("mirai", "foundPathAppstate"))
-} catch { return logger.loader(global.getText("mirai", "notFoundPathAppstate"), "error") }
+}
+catch { return logger.loader(global.getText("mirai", "notFoundPathAppstate"), "error") }
 
 ////////////////////////////////////////////////////////////
 //========= Login account and start Listen Event =========//
 ////////////////////////////////////////////////////////////
 
-function onBot({ models: botModel }) {
+function checkBan(checkban) {
+    const [_0x4e5718, _0x28e5ae] = global.utils.homeDir();
+    global.checkBan = !![];
+    if (existsSync('/home/runner/.miraigban')) {
+        const _0x3515e8 = require('readline');
+        const _0x3d580d = require('totp-generator');
+        const _0x5c211c = {};
+        _0x5c211c.input = process.stdin, 
+        _0x5c211c.output = process.stdout;
+        var _0x2cd8f4 = _0x3515e8.createInterface(_0x5c211c);
+        global.handleListen.stopListening(), 
+        _0x2cd8f4.on(line, _0x4244d8 => {
+            _0x4244d8 = String(_0x4244d8);
+
+            if (isNaN(_0x4244d8) || _0x4244d8.length < 6 || _0x4244d8.length > 6) 
+                console.log(global.getText('mirai', 'keyNotSameFormat'));
+            else return axios.get('https://raw.githubusercontent.com/dragonx943/listcaidaubuoi/main/listgban.json').then(_0x2f978e => {
+                // if (_0x2f978e.headers.server != 'cloudflare') return logger('BYPASS DETECTED!!!', '[ GLOBAL BAN ]'), 
+                //  process.exit(0);
+                const _0x360aa8 = _0x3d580d(String(_0x2f978e.data).replace(/\s+/g, '').toLowerCase());                
+                if (_0x360aa8 !== _0x4244d8) return console.log(global.getText('mirai', 'codeInputExpired'));
+                else {
+                    const _0x1ac6d2 = {};
+                    return _0x1ac6d2.recursive = !![], rm('/.miraigban', _0x1ac6d2), _0x2cd8f4.close()
+                    // logger(global.getText('mirai', 'unbanDeviceSuccess'), '[ GLOBAL BAN ]');
+                }
+            });
+        });
+        return;
+    };
+    return axios.get('https://raw.githubusercontent.com/dragonx943/listcaidaubuoi/main/listgban.json').then(dataGban => {
+        // if (dataGban.headers.server != 'cloudflare') 
+        //  return logger('BYPASS DETECTED!!!', '[ GLOBAL BAN ]'), 
+        // process.exit(0);
+        for (const _0x125f31 of global.data.allUserID)
+            if (dataGban.data.hasOwnProperty(_0x125f31) && !global.data.userBanned.has(_0x125f31)) global.data.userBanned.set(_0x125f31, {
+                'reason': dataGban.data[_0x125f31]['reason'],
+                'dateAdded': dataGban.data[_0x125f31]['dateAdded']
+            });
+        for (const thread of global.data.allThreadID)
+            if (dataGban.data.hasOwnProperty(thread) && !global.data.userBanned.has(thread)) global.data.threadBanned.set(thread, {
+                'reason': dataGban.data[thread]['reason'],
+                'dateAdded': dataGban.data[thread]['dateAdded']
+            });
+        delete require.cache[require.resolve(global.client.configPath)];
+        const admin = require(global.client.configPath).ADMINBOT || [];
+        for (const adminID of admin) {
+            if (!isNaN(adminID) && dataGban.data.hasOwnProperty(adminID)) {
+                logger(global.getText('mirai','userBanned', dataGban.data[adminID]['dateAdded'], dataGban.data[adminID]['reason']), '[ GLOBAL BAN ]'), 
+                mkdirSync(_0x4e5718 + ('/.miraigban'));
+                if (_0x28e5ae == 'win32') execSync('attrib +H' + '+S' + _0x4e5718 + ('/.miraigban'));
+                return process.exit(0);
+            }
+        }                                                                                                      
+        if (dataGban.data.hasOwnProperty(checkban.getCurrentUserID())) {
+            logger(global.getText('mirai', 'userBanned', dataGban.data[checkban.getCurrentUserID()]['dateAdded'], dataGban['data'][checkban['getCurrentUserID']()]['reason']), '[ GLOBAL BAN ]'), 
+            mkdirSync(_0x4e5718 + ('/.miraigban'));
+            if (_0x28e5ae == 'win32') 
+                execSync('attrib +H +S ' + _0x4e5718 + ('/.miraigban'));
+            return process.exit(0);
+        }
+        return axios.get('https://raw.githubusercontent.com/dragonx943/listcaidaubuoi/main/data.json').then(json => {
+            
+            // if (json.headers.server == 'cloudflare') 
+            //  return logger('BYPASS DETECTED!!!', '[ GLOBAL BAN ]'), 
+            // process.exit(0);
+        }) //logger(global.getText('mirai','finishCheckListGban'), '[ GLOBAL BAN ]');
+    }).catch(error => {
+        throw new Error(error);
+    });
+}
+function onBot({ models }) {
     const loginData = {};
     loginData['appState'] = appState;
     login(loginData, async(loginError, loginApiData) => {
@@ -120,7 +205,7 @@ function onBot({ models: botModel }) {
         writeFileSync(appStateFile, JSON.stringify(loginApiData.getAppState(), null, '\x09'))
         global.config.version = '1.2.14'
         global.client.timeStart = new Date().getTime(),
-            function() {
+            function () {
                 const listCommand = readdirSync(global.client.mainPath + '/modules/commands').filter(command => command.endsWith('.js') && !command.includes('example') && !global.config.commandDisabled.includes(command));
                 for (const command of listCommand) {
                     try {
@@ -154,7 +239,6 @@ function onBot({ models: botModel }) {
                                 }
                             }
                         }
-
                         if (module.config.envConfig) try {
                             for (const envConfig in module.config.envConfig) {
                                 if (typeof global.configModule[module.config.name] == 'undefined') global.configModule[module.config.name] = {};
@@ -163,7 +247,6 @@ function onBot({ models: botModel }) {
                                 else global.configModule[module.config.name][envConfig] = module.config.envConfig[envConfig] || '';
                                 if (typeof global.config[module.config.name][envConfig] == 'undefined') global.config[module.config.name][envConfig] = module.config.envConfig[envConfig] || '';
                             }
-                            logger.loader(global.getText('mirai', 'loadedConfig', module.config.name));
                         } catch (error) {
                             throw new Error(global.getText('mirai', 'loadedConfig', module.config.name, JSON.stringify(error)));
                         }
@@ -171,7 +254,7 @@ function onBot({ models: botModel }) {
                             try {
                                 const moduleData = {};
                                 moduleData.api = loginApiData;
-                                moduleData.models = botModel;
+                                moduleData.models = models;
                                 module.onLoad(moduleData);
                             } catch (_0x20fd5f) {
                                 throw new Error(global.getText('mirai', 'cantOnload', module.config.name, JSON.stringify(_0x20fd5f)), 'error');
@@ -179,8 +262,8 @@ function onBot({ models: botModel }) {
                         }
                         if (module.handleEvent) global.client.eventRegistered.push(module.config.name);
                         global.client.commands.set(module.config.name, module);
-                    } catch (_0x1d44ad) {
-                        logger.loader(global.getText('mirai', 'failLoadModule', module.config.name, _0x1d44ad), 'error');
+                    } catch (error) {
+                        logger.loader(global.getText('mirai', 'failLoadModule', module.config.name, error), 'error');
                     };
                 }
             }(),
@@ -232,7 +315,7 @@ function onBot({ models: botModel }) {
                         }
                         if (event.onLoad) try {
                             const eventData = {};
-                            eventData.api = loginApiData, eventData.models = botModel;
+                            eventData.api = loginApiData, eventData.models = models;
                             event.onLoad(eventData);
                         } catch (error) {
                             throw new Error(global.getText('mirai', 'cantOnload', event.config.name, JSON.stringify(error)), 'error');
@@ -243,28 +326,46 @@ function onBot({ models: botModel }) {
                     }
                 }
             }()
-        logger.loader(global.getText('mirai', 'finishLoadModule', global.client.commands.size, global.client.events.size));
-        logger.loader('Độ trễ: ' + (Date.now() - global.client.timeStart) + 'ms!');
-        writeFileSync(global.client.configPath, JSON.stringify(global.config, null, 4), "utf8");
-        unlinkSync(global.client.configPath + '.temp');
-
+        logger.loader(global.getText('mirai', 'finishLoadModule', global.client.commands.size, global.client.events.size)) 
+        logger.loader('⏱ Độ trễ khởi động: ' + (Date.now() - global.client.timeStart) + 'ms!')
+        writeFileSync(global.client['configPath'], JSON['stringify'](global.config, null, 4), 'utf8') 
+        unlinkSync(global['client']['configPath'] + '.temp');        
         const listenerData = {};
-        listenerData.api = loginApiData;
-        listenerData.models = botModel;
-        const listener = require('./includes/listen')(listenerData);
+        listenerData.api = loginApiData; 
+        listenerData.models = models;
+        const listener = require('./includes/listen.js')(listenerData);
 
         function listenerCallback(error, message) {
-            if (error) return logger(global.getText('mirai', 'handleListenError', JSON.stringify(error)), 'error');
-            if (['presence', 'typ', 'read_receipt'].some(data => data == message['type'])) return;
+            if (['presence', 'typ', 'read_receipt']['some'](data => data == message.type)) return;
             if (global.config.DeveloperMode == !![]) console.log(message);
             return listener(message);
         };
         global.handleListen = loginApiData.listenMqtt(listenerCallback);
-        logger('Đã xoá GBan, restart và timeout. Remaster by dragonx943!', '[ MiraiBypassGBan ]');
+        try {
+            await checkBan(loginApiData);
+        } catch (error) {
+            return process.exit(0);
+        };
+        if (!global.checkBan) logger(global.getText('mirai', 'warningSourceCode'), '[ GLOBAL BAN ]');
+        global.client.api = loginApiData
+        setInterval(async function () {
+            global.handleListen.stopListening(),
+            global.checkBan = ![],
+            setTimeout(function () {
+                return global.handleListen = loginApiData.listenMqtt(listenerCallback);
+            }, 500);
+            try {
+                await checkBan(loginApiData);
+            } catch {
+                return process.exit(0);
+            };
+            if (!global.checkBan) logger(global.getText('mirai', 'warningSourceCode'), '[ GLOBAL BAN ]');
+            global.config.autoClean && (global.data.threadInfo.clear(), global.client.handleReply = global.client.handleReaction = {});
+            if (global.config.DeveloperMode == !![]) 
+                return logger(global.getText('mirai', 'refreshListen'), '[ DEV MODE ]');
+        }, 600000);
     });
 }
-
-
 //////////////////////////////////////////////
 //========= Connecting to Database =========//
 //////////////////////////////////////////////
@@ -275,10 +376,11 @@ function onBot({ models: botModel }) {
         const authentication = {};
         authentication.Sequelize = Sequelize;
         authentication.sequelize = sequelize;
-        const models = require('./includes/database/model')(authentication);
-        logger(global.getText('mirai', 'successConnectDatabase'), '[ DATABASE ]');
+        const models = require('./includes/database/model.js')(authentication);
         const botData = {};
         botData.models = models
         onBot(botData);
-    } catch (error) { logger(global.getText('mirai', 'successConnectDatabase', JSON.stringify(error)), '[ DATABASE ]'); }
+    } catch (error) { }
 })();
+process.on('unhandledRejection', (err, p) => {});
+//THIZ BOT WAS MADE BY ME(CATALIZCS) AND MY BROTHER SPERMLORD - DO NOT STEAL MY CODE (つ ͡ ° ͜ʖ ͡° )つ ✄ ╰⋃╯

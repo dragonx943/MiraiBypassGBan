@@ -9,7 +9,9 @@
   "author": "Catalizcs",
   "license": "ISC",
   "dependencies": {
+    "canvas": "^2.11.2",
     "fast-speedtest-api": "^0.3.2",
+    "lyrics-finder": "^21.7.0",
     "node-superfetch": "^0.2.3",
     "pidusage": "^2.0.21",
     "qrcode": "^1.4.4",

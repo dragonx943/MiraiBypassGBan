@@ -4,9 +4,8 @@
 	"description": "Code và Bypass bởi các idol MaiHuyBao, JustGon, D-Jukie, OREO",
 	"main": "mirai.js",
 	"scripts": {
-		"start": "node index",
-		"login": "node login",
-		"test": "node --trace-warnings --use_strict --async-stack-traces mirai"
+		"start": "node mirai.js",
+		"test": "node --trace-warnings --use_strict --async-stack-traces mirai.js"
 	},
 	"repository": {
 		"type": "git",
@@ -25,11 +24,10 @@
 	"author": "Dragonx943 & Team MiraiV2",
 	"license": "GPL-3.0",
 	"bugs": {
-		"url": "https://github.com/dragonx943/MiraiBypassGBan"
+		"url": "https://github.com/dragonx943/MiraiBypassGBan/issues"
 	},
 	"homepage": "https://github.com/dragonx943/MiraiBypassGBan",
 	"dependencies": {
-		"@maihuybao/fca-unofficial": "",
 		"@miraipr0ject/assets": "",
 		"axios": "^1.1.3",
 		"body-parser": "",
@@ -42,7 +40,6 @@
 		"eval": "",
 		"express": "^4.18.2",
 		"extract-zip": "",
-		"fb-tools": "^2.0.10",
 		"figlet": "",
 		"fs-extra": "^10.1.0",
 		"helyt": "^1.0.0",

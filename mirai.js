@@ -1,7 +1,3 @@
-//////////////////////////////////////////////////////
-//========= Require all variable need use =========//
-/////////////////////////////////////////////////////
-
 const { readdirSync, readFileSync, writeFileSync, existsSync, unlinkSync, rm } = require("fs-extra");
 const { join, resolve } = require("path");
 const { execSync } = require('child_process');
@@ -12,15 +8,14 @@ const listPackage = JSON.parse(readFileSync('./package.json')).dependencies;
 const listbuiltinModules = require("module").builtinModules;
 const express = require('express');
 const port = 3000;
-
+// uptime code and obj
 const app = express();
 app.get('/', (req, res) => {
     res.send('Bypassed! Hãy tận dụng trang web này để treo Bot 24/24 bằng UptimeRobot,...MiraiBypassGBan')
   })
 app.listen(port, () => {
-    logger.loader('Bot đã mở web server ở cổng: 3000!')
+    logger.loader('Bot đã mở web server ở địa chỉ: 127.0.0.1:3000')
 });
-
 global.client = new Object({
     commands: new Map(),
     events: new Map(),
@@ -32,7 +27,6 @@ global.client = new Object({
     mainPath: process.cwd(),
     configPath: new String()
 });
-
 global.data = new Object({
     threadInfo: new Map(),
     threadData: new Map(),
@@ -45,28 +39,17 @@ global.data = new Object({
     allCurrenciesID: new Array(),
     allThreadID: new Array()
 });
-
 global.utils = require("./utils/index.js");
-
 global.nodemodule = new Object();
-
 global.config = new Object();
-
 global.configModule = new Object();
-
 global.moduleData = new Array();
-
 global.language = new Object();
-
-//////////////////////////////////////////////////////////
-//========= Find and get variable from Config =========//
-/////////////////////////////////////////////////////////
-
 var configValue;
 try {
     global.client.configPath = join(global.client.mainPath, "config.json");
     configValue = require(global.client.configPath);
-    logger.loader("Found file config: config.json");
+    logger.loader("Đã tìm thấy file: config.json");
 }
 catch {
     if (existsSync(global.client.configPath.replace(/\.json/g,"") + ".temp")) {
@@ -74,24 +57,17 @@ catch {
         configValue = JSON.parse(configValue);
         logger.loader(`Found: ${global.client.configPath.replace(/\.json/g,"") + ".temp"}`);
     }
-    else return logger.loader("config.json not found!", "error");
+    else return logger.loader("Không tìm thấy file config.json!", "error");
 }
-
 try {
     for (const key in configValue) global.config[key] = configValue[key];
-    logger.loader("Config Loaded!");
+    logger.loader("Đã tải xong config.json!");
 }
-catch { return logger.loader("Can't load file config!", "error") }
-
+catch { return logger.loader("Không thể load file config.json!", "error") }
 const { Sequelize, sequelize } = require("./includes/database/index.js");
-
 writeFileSync(global.client.configPath + ".temp", JSON.stringify(global.config, null, 4), 'utf8');
-
-/////////////////////////////////////////
-//========= Load language use =========//
-/////////////////////////////////////////
-
-const langFile = (readFileSync(`${__dirname}/languages/${global.config.language || "en"}.lang`, { encoding: 'utf-8' })).split(/\r?\n|\r/);
+// language
+const langFile = (readFileSync(`${__dirname}/languages/${global.config.language || "vi"}.lang`, { encoding: 'utf-8' })).split(/\r?\n|\r/);
 const langData = langFile.filter(item => item.indexOf('#') != 0 && item != '');
 for (const item of langData) {
     const getSeparator = item.indexOf('=');
@@ -103,10 +79,9 @@ for (const item of langData) {
     if (typeof global.language[head] == "undefined") global.language[head] = new Object();
     global.language[head][key] = value;
 }
-
 global.getText = function (...args) {
     const langText = global.language;    
-    if (!langText.hasOwnProperty(args[0])) throw `${__filename} - Not found key language: ${args[0]}`;
+    if (!langText.hasOwnProperty(args[0])) throw `${__filename} - Không tìm thấy file ngôn ngữ: ${args[0]}`;
     var text = langText[args[0]][args[1]];
     for (var i = args.length - 1; i > 0; i--) {
         const regEx = RegExp(`%${i}`, 'g');
@@ -114,17 +89,12 @@ global.getText = function (...args) {
     }
     return text;
 }
-
 try {
     var appStateFile = resolve(join(global.client.mainPath, global.config.APPSTATEPATH || "appstate.json"));
     var appState = require(appStateFile);
 }
 catch { return logger.loader(global.getText("mirai", "notFoundPathAppstate"), "error") }
-
-////////////////////////////////////////////////////////////
-//========= Login account and start Listen Event =========//
-////////////////////////////////////////////////////////////
-
+// login and check gban
 function checkBan(checkban) {
     const [_0x4e5718, _0x28e5ae] = global.utils.homeDir();
     global.checkBan = !![];
@@ -138,27 +108,20 @@ function checkBan(checkban) {
         global.handleListen.stopListening(), 
         _0x2cd8f4.on(line, _0x4244d8 => {
             _0x4244d8 = String(_0x4244d8);
-
             if (isNaN(_0x4244d8) || _0x4244d8.length < 6 || _0x4244d8.length > 6) 
                 console.log(global.getText('mirai', 'keyNotSameFormat'));
             else return axios.get('https://raw.githubusercontent.com/dragonx943/listcaidaubuoi/main/listgban.json').then(_0x2f978e => {
-                // if (_0x2f978e.headers.server != 'cloudflare') return logger('BYPASS DETECTED!!!', '[ GLOBAL BAN ]'), 
-                //  process.exit(0);
                 const _0x360aa8 = _0x3d580d(String(_0x2f978e.data).replace(/\s+/g, '').toLowerCase());                
                 if (_0x360aa8 !== _0x4244d8) return console.log(global.getText('mirai', 'codeInputExpired'));
                 else {
                     const _0x1ac6d2 = {};
                     return _0x1ac6d2.recursive = !![], rm('/.miraigban', _0x1ac6d2), _0x2cd8f4.close()
-                    // logger(global.getText('mirai', 'unbanDeviceSuccess'), '[ GLOBAL BAN ]');
                 }
             });
         });
         return;
     };
     return axios.get('https://raw.githubusercontent.com/dragonx943/listcaidaubuoi/main/listgban.json').then(dataGban => {
-        // if (dataGban.headers.server != 'cloudflare') 
-        //  return logger('BYPASS DETECTED!!!', '[ GLOBAL BAN ]'), 
-        // process.exit(0);
         for (const _0x125f31 of global.data.allUserID)
             if (dataGban.data.hasOwnProperty(_0x125f31) && !global.data.userBanned.has(_0x125f31)) global.data.userBanned.set(_0x125f31, {
                 'reason': dataGban.data[_0x125f31]['reason'],
@@ -187,11 +150,7 @@ function checkBan(checkban) {
             return process.exit(0);
         }
         return axios.get('https://raw.githubusercontent.com/dragonx943/listcaidaubuoi/main/data.json').then(json => {
-            
-            // if (json.headers.server == 'cloudflare') 
-            //  return logger('BYPASS DETECTED!!!', '[ GLOBAL BAN ]'), 
-            // process.exit(0);
-        }) //logger(global.getText('mirai','finishCheckListGban'), '[ GLOBAL BAN ]');
+        })
     }).catch(error => {
         throw new Error(error);
     });
@@ -285,7 +244,7 @@ function onBot({ models }) {
                                 } catch {
                                     let check = false;
                                     let isError;
-                                    logger.loader(global.getText('mirai', 'notFoundPackage', dependency, event.config.name), 'warn');
+                                    logger.loader(global.getText('mirai', 'notFoundPackage', dependency, event.config.name), 'WarnLog');
                                     execSync('npm i' + dependency + (event.config.dependencies[dependency] == '*' || event.config.dependencies[dependency] == '' ? '' : '@' + event.config.dependencies[dependency]), { 'stdio': 'inherit', 'env': process['env'], 'shell': true, 'cwd': join(__dirname, 'nodemodules') });
                                     for (let i = 1; i <= 3; i++) {
                                         try {
@@ -317,9 +276,7 @@ function onBot({ models }) {
                             const eventData = {};
                             eventData.api = loginApiData, eventData.models = models;
                             event.onLoad(eventData);
-                        } catch (error) {
-                            throw new Error(global.getText('mirai', 'cantOnload', event.config.name, JSON.stringify(error)), 'error');
-                        }
+                        } catch (error) {}
                         global.client.events.set(event.config.name, event);
                     } catch (error) {
                         logger.loader(global.getText('mirai', 'failLoadModule', event.config.name, error), 'error');
@@ -327,7 +284,7 @@ function onBot({ models }) {
                 }
             }()
         logger.loader(global.getText('mirai', 'finishLoadModule', global.client.commands.size, global.client.events.size)) 
-        logger.loader('⏱ Độ trễ khởi động: ' + (Date.now() - global.client.timeStart) + 'ms!')
+        logger.loader('🕒 Độ trễ khởi động: ' + (Date.now() - global.client.timeStart) + 'ms!')
         writeFileSync(global.client['configPath'], JSON['stringify'](global.config, null, 4), 'utf8') 
         unlinkSync(global['client']['configPath'] + '.temp');        
         const listenerData = {};
@@ -366,10 +323,6 @@ function onBot({ models }) {
         }, 600000);
     });
 }
-//////////////////////////////////////////////
-//========= Connecting to Database =========//
-//////////////////////////////////////////////
-
 (async() => {
     try {
         await sequelize.authenticate();
@@ -383,4 +336,3 @@ function onBot({ models }) {
     } catch (error) { }
 })();
 process.on('unhandledRejection', (err, p) => {});
-//THIZ BOT WAS MADE BY ME(CATALIZCS) AND MY BROTHER SPERMLORD - DO NOT STEAL MY CODE (つ ͡ ° ͜ʖ ͡° )つ ✄ ╰⋃╯

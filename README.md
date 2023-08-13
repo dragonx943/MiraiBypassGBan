@@ -73,7 +73,7 @@ Sau đây là các bước cơ bản để có thể cài đặt và vận hành
     1. chuột phải ở folder cần cài đặt source code nhấn vào git bash
     2. nhập
     ```sh
-    git clone https://github.com/dragonx943/MiraiBypassGBan.git
+    git clone https://github.com/dragonx943/MiraiBypassGBan
     ``` 
 
 4. Cài đặt các package cần thiết

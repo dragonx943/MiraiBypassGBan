@@ -152,7 +152,7 @@ Sau đây là các bước cơ bản để có thể cài đặt và vận hành
 
 #### Replit/Github
 
-Ngoài các cách nêu trên thì đa số hiện nay mọi người đều lựa chọn Host Bot Mirai trên các dịch vụ Cloud như Replit, Github, Glitch,...Trong mục README.md này mình sẽ chỉ đưa ra cách Host ở Replit và Github
+Ngoài các cách nêu trên thì đa số hiện nay mọi người đều lựa chọn Host Bot Mirai trên các dịch vụ Cloud như Replit, Github, Glitch,...Trong mục README.md này mình sẽ chỉ đưa ra cách Host ở Github FREE:
 
 **1**. **Trên Github**:
 1. Tạo tài khoản
@@ -168,28 +168,8 @@ Ngoài các cách nêu trên thì đa số hiện nay mọi người đều lự
     node .
     ```
 
-**2**. **Trên Replit**:
-1. Tạo tài khoản
-2. Đăng nhập và ấn **+ Create Repl**. Sau đó chọn **Import from Github** và dán *https://github.com/dragonx943/MiraiBypassGBan* vào mục **Github URL** và ấn **Import from Github**
-3. Qua tab **Shell**, gõ:
-    ```
-    python -V
-    ```
-4. Tại bảng **Shell** sẽ hiện ra 1 menu bao gồm nhiều lựa chọn về python, vui lòng chọn **python39full** và ấn Enter.
-5. Vẫn ở bảng **Shell**, gõ câu lệnh cài đặt:
-    ```
-    npm i
-    ```
-6. Thêm file appstate.json, sửa file config.json, thêm modules (nếu có)
-7. Qua bảng Console, gõ câu lệnh khởi chạy:
-    ```
-    node .
-    ```
-
-**So sánh + Lưu ý**:
-- Nhìn chung thì đây vẫn là 2 dịch vụ giúp chạy và treo Bot tốt, tuy nhiên sẽ có 1 số vấn đề:
-+ Github: Rất dễ cài đặt (Các Package và Service đã được cài sẵn), Free, cấu hình cao (2 cores + 4gb ram / 4 cores + 8gb ram - 32gb) nhưng rất khó để treo 24/24 hoặc dùng ở trình duyệt của điện thoại!
-+ Replit: Hơi phức tạp xíu vì có 1 số Package và Service chưa được tích hợp sẵn, Free nhưng cấu hình cực thấp (cpu gần như ở mức 100%, ram và bộ nhớ lưu trữ cho phép rất ít), có thể treo 24/24 với các dịch vụ Uptime như UptimeRobot (free) hoặc FreshPing (free)
+**Lưu ý**:
+- Nhìn chung thì đây vẫn là dịch vụ giúp chạy và treo Bot tốt, tuy nhiên sẽ có 1 số vấn đề: Github rất dễ cài đặt (Các Package và Service đã được cài sẵn), Free, cấu hình cao (2 cores + 4gb ram / 4 cores + 8gb ram - 32gb) nhưng rất khó để treo 24/24 hoặc dùng ở trình duyệt của điện thoại!
 
 #### Video hướng dẫn cài đặt
 

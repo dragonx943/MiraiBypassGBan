@@ -11,10 +11,10 @@ module.exports = function ({ models, api }) {
 			else if (global.data.allUserID.includes(id)) {
 				const nameUser = (await this.getData(id)).name;
 				if (nameUser) return nameUser;
-				else return "Người dùng facebook";
-			} else return "Người dùng facebook";
+				else return "Facebook users";
+			} else return "Facebook users";
 		}
-		catch { return "Người dùng facebook" }
+		catch { return "Facebook users" }
 	}
 
 	async function getAll(...data) {

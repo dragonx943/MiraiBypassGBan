@@ -1,3 +1,5 @@
+# Repo này đã bị lỗi thời, tôi đã không còn hứng thú với dự án này từ lâu nên code này chỉ mang mục đích lưu trữ cá nhân 🐧
+
 <br />
 <p align="center">
     <a href="https://github.com/miraiPr0ject/miraiv2">
